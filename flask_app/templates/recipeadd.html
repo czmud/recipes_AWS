@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <h1>Add a new Recipe!</h1>
+    <a href="/recipes">Back to Recipes</a><br>
+    <a href="/user_logout">Logout</a><br>
+
+    {% with messages = get_flashed_messages(category_filter=["recipes"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action='/recipe_add' method='post'>
+        <label for='name'>Name:</label>
+        <input type='text' name='name' value="{{session.name}}" required><br>
+        <label for='description'>Description:</label>
+        <input type='text' name='description' value="{{session.description}}" required><br>
+        <label for='instructions'>Instructions:</label>
+        <input type='text' name='instructions' value="{{session.instructions}}" required><br>
+        <label for='made_at'>Date Made:</label>
+        <input type='date' name='made_at' value="{{session.made_at}}" required><br>
+        <label for="under_thirty_mins">Under 30 Minutes?</label>
+        <label for="radio_yes">Yes</label>
+        <input type="radio" id="redio_yes" name="under_thirty_mins" value="1" 
+            {% if 'under_thirty_mins' not in session or session.under_thirty_mins == 1  %} checked {% endif %}>
+        <label for="radio_no">No</label>
+        <input type="radio" id="redio_no" name="under_thirty_mins" value="0"
+        {% if session.under_thirty_mins == 0 %} checked {% endif %}><br>
+        <input type='submit' value='Submit'>
+    </form>
+
+
+</body>
+</html>

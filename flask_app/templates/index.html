@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <h1>Recipe Share</h1>
+
+    <h2>Register</h2>
+    {% with messages = get_flashed_messages(category_filter=["register"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/user_register' method='post'>
+        <label for='first_name'>First Name:</label>
+        <input type='text' name='first_name' value="{{session.first_name}}" required><br>
+        <label for='last_name'>Last Name:</label>
+        <input type='text' name='last_name' value="{{session.last_name}}" required><br>
+        <label for='email'>Email:</label>
+        <input type='text' name='email' value="{{session.email}}" required><br>
+        <label for='password'>Password:</label>
+        <input type='password' name='password' required><br>
+        <label for='password_confirm'>Confirm Password:</label>
+        <input type='password' name='password_confirm' required><br>
+        <input type='submit' value='Submit'>
+    </form>
+
+    <h2>Log in </h2>
+    {% with messages = get_flashed_messages(category_filter=["login"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/user_login' method='post'>
+        <label for='email'>Email:</label>
+        <input type='text' name='email' value="{{session.email_login}}" required><br>
+        <label for='password'>Password:</label>
+        <input type='password' name='password' required><br>
+        <input type='submit' value='Submit'>
+    </form>
+    
+</body>
+</html>
