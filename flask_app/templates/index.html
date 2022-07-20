@@ -30,6 +30,14 @@
         <input type='password' name='password_confirm' required><br>
         <input type='submit' value='Submit'>
     </form>
+    <h3>Password Rules:</h3>
+    <p>
+        -Must be >= 8 characters long <br>
+        -Must contain 1 lowercase [a-z] <br>
+        -Must contain 1 uppercase [A-Z] <br>
+        -Must contain 1 number [0-9] <br>
+        -Must contain 1 of these special characters [!#$%&?] <br>
+    </p>
 
     <h2>Log in </h2>
     {% with messages = get_flashed_messages(category_filter=["login"]) %}
