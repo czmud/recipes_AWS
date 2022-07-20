@@ -127,7 +127,6 @@ class User:
         if not password_regex.match(data['password']):
             is_valid = False
             flash("must enter valid password", "register")
-            flash("password must contain 8 characters", "register")
         elif not password_regex.match(data['password_confirm']):
             is_valid = False
             flash("passwords and confirmation do not match", "register")
