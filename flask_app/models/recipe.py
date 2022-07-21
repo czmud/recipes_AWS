@@ -17,6 +17,8 @@ class Recipe:
         self.users = []
     @classmethod
     def save( cls, data ):
+        print(5)
+        print( data )
         query = "INSERT INTO recipes ( user_id, name, description, instructions, under_thirty_mins, made_at ) VALUES \
             ( %(user_id)s, %(name)s, %(description)s, %(instructions)s, %(under_thirty_mins)s, %(made_at)s );"
         return connectToMySQL(cls.db).query_db( query, data )
@@ -82,3 +84,13 @@ class Recipe:
             flash("Instructions must be at least 3 characters", "recipes")
             is_valid = False
         return is_valid
+    @staticmethod
+    def curate_user_input( input ):
+        curated_input = ""
+        for i in range(len(input)):
+            if input[i] == '%':
+                curated_input += '%'
+            curated_input += input[i]
+        return curated_input
+
+

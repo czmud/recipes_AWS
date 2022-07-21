@@ -82,13 +82,12 @@ def add_new_recipe():
         return redirect('/recipes/new')
     data = {
         "user_id": session["user_id"],
-        "name": request.form["name"].title(),
-        "description": request.form["description"],
-        "instructions": request.form["instructions"],
+        "name": recipe.Recipe.curate_user_input(request.form["name"].title()),
+        "description": recipe.Recipe.curate_user_input(request.form["description"]),
+        "instructions": recipe.Recipe.curate_user_input(request.form["instructions"]),
         "under_thirty_mins": int(request.form["under_thirty_mins"]),
         "made_at": request.form["made_at"]
     }
-    
     recipe.Recipe.save( data )
 
     return redirect('/recipes')
